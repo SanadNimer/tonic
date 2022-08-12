@@ -1,4 +1,4 @@
-import librosa
+# import librosa
 import numpy as np
 from dataclasses import dataclass
 from scipy.signal import butter, sosfilt
@@ -25,7 +25,8 @@ class FixLength:
     axis: int = 1
 
     def __call__(self, data: np.ndarray):
-        return librosa.util.fix_length(data, self.length, self.axis)
+        # return librosa.util.fix_length(data, self.length, self.axis)
+        return None
 
 
 @dataclass
