@@ -33,11 +33,8 @@ class NCALTECH101(Dataset):
     # filename = "N-Caltech101-archive.zip"
     # file_md5 = "66201824eabb0239c7ab992480b50ba3"
     # data_filename = "Caltech101.zip"
-    folder_name = "Caltech101"
-    annotations_folder_name = "Caltech101_annotations"
-
-    # save_to = /dataset
-    # location_on_system = /dataset/NCALTECH101
+    folder_name = "images"
+    annotations_folder_name = "annotations"
 
 
     sensor_size = None  # all recordings are of different size
@@ -52,17 +49,15 @@ class NCALTECH101(Dataset):
         # if not self._check_exists():
         #     self.download()
 
-        file_path = os.path.join(self.location_on_system, self.folder_name)
+        file_path = os.path.join(save_to, self.folder_name)
         for path, dirs, files in os.walk(file_path):
             dirs.sort()
             for file in files:
                 if file.endswith("bin"):
                     self.data.append(path + "/" + file)
-                    print("###Sanad file name: ", path + "/" + file)
-                    annotationFileName = 'annotation' + str(file)[5:]
                     # label_number = os.path.basename(path)
-                    print("####Sanad annotation name: ", self.annotations_folder_name + "/" + annotationFileName)
-                    self.targets.append(self.annotations_folder_name + "/" + annotationFileName)
+                    annotationFileName = 'annotation' + str(file)[5:]
+                    self.targets.append(save_to + "/" + self.annotations_folder_name + "/" + annotationFileName)
 
     def __getitem__(self, index):
         """
