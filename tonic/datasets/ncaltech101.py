@@ -83,7 +83,7 @@ class NCALTECH101(Dataset):
         print("_____________________")
         print("###Sanad sample event: ", events)
         print("###Sanad sample target: ", target)
-        return torch.tensor(events), torch.tensor(target)
+        return torch.tensor(events.astype(np.int32)), torch.tensor(target.astype(np.int32))
 
     def __len__(self):
         return len(self.data)
