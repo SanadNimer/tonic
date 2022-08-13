@@ -71,6 +71,14 @@ class NCALTECH101(Dataset):
             events = self.transform(events)
         if self.target_transform is not None:
             target = self.target_transform(target)
+        print("###Sanad type of events: ", type(events))
+        print("###Sanad shape of events: ", np.shape(events))
+        print("_____________________")
+        print("###Sanad type of target: ", type(target))
+        print("###Sanad shape of target: ", np.shape(target))
+        print("_____________________")
+        print("###Sanad sample event: ", events)
+        print("###Sanad sample target: ", target)
         return torch.tensor(events), torch.tensor(target)
 
     def __len__(self):
