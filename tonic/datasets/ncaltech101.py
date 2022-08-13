@@ -51,6 +51,7 @@ class NCALTECH101(Dataset):
         #     self.download()
 
         file_path = os.path.join(save_to, self.folder_name)
+        print("####Sanad waling through directory: " + file_path)
         for path, dirs, files in os.walk(file_path):
             dirs.sort()
             for file in files:
