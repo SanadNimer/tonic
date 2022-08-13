@@ -1,5 +1,6 @@
 import os
 import numpy as np
+import torch
 
 from tonic.io import read_mnist_file
 from tonic.dataset import Dataset
@@ -72,7 +73,7 @@ class NCALTECH101(Dataset):
             events = self.transform(events)
         if self.target_transform is not None:
             target = self.target_transform(target)
-        return events, target
+        return torch.tensor(events), torch.tensor(target)
 
     def __len__(self):
         return len(self.data)
@@ -90,4 +91,4 @@ class NCALTECH101(Dataset):
             arr.fromfile(file, 12)
             (x, y) = arr[2], arr[3]  # coordinates of top left corner
             w, h = arr[4] - arr[2], arr[7] - arr[3]
-            return x, y, w, h
+            return np.array([x, y, w, h])
