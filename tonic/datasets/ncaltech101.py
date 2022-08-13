@@ -70,7 +70,7 @@ class NCALTECH101(Dataset):
         events["y"] -= events["y"].min()
         if self.transform is not None:
             events = self.transform(events)
-        transformation = transforms.ToFrame(sensor_size=(224, 224, 2), n_time_bins=5)
+        transformation = transforms.ToFrame(n_time_bins=5)
         events_transformed = transformation(events)
         print("###Sanad type of events_transformed: ", type(events_transformed))
         print("###Sanad type of events_transformed[0]: ", type(events_transformed[0]))

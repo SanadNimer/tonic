@@ -50,9 +50,12 @@ def to_frame_numpy(
 
     if not sensor_size:
         sensor_size_x = int(events["x"].max() + 1)
+        print("###Sanad sensor_size_x: ", sensor_size_x)
         sensor_size_p = len(np.unique(events["p"]))
+        print("###Sanad sensor_size_p: ", sensor_size_p)
         if "y" in events.dtype.names:
             sensor_size_y = int(events["y"].max() + 1)
+            print("###Sanad sensor_size_y: ", sensor_size_y)
             sensor_size = (sensor_size_x, sensor_size_y, sensor_size_p)
         else:
             sensor_size = (sensor_size_x, 1, sensor_size_p)
