@@ -4,6 +4,7 @@ import torch
 
 from tonic.io import read_mnist_file
 from tonic.dataset import Dataset
+import tonic.transforms as transforms
 # from tonic.download_utils import extract_archive
 import array
 
@@ -69,6 +70,12 @@ class NCALTECH101(Dataset):
         events["y"] -= events["y"].min()
         if self.transform is not None:
             events = self.transform(events)
+        transformation = transforms.ToFrame(sensor_size=(224, 224, 2), n_time_bins=5)
+        events_transformed = transformation(events)
+        print("###Sanad type of events_transformed: ", type(events_transformed))
+        print("###Sanad type of events_transformed[0]: ", type(events_transformed[0]))
+        print("###Sanad events_transformed: ", events_transformed)
+        print("_____________________")
         if self.target_transform is not None:
             target = self.target_transform(target)
         print("index: ", index)
