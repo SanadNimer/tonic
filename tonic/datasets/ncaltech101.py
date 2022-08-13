@@ -34,21 +34,19 @@ class NCALTECH101(Dataset):
     # filename = "N-Caltech101-archive.zip"
     # file_md5 = "66201824eabb0239c7ab992480b50ba3"
     # data_filename = "Caltech101.zip"
-    folder_name = "images"
-    annotations_folder_name = "annotations"
-
 
     sensor_size = None  # all recordings are of different size
     dtype = np.dtype([("x", int), ("y", int), ("t", int), ("p", int)])
     ordering = dtype.names
 
-    def __init__(self, save_to, transform=None, target_transform=None):
+    def __init__(self, save_to, transform=None, target_transform=None, images_folder="images",
+                 annotations_folder="annotations"):
         super(NCALTECH101, self).__init__(
             save_to, transform=transform, target_transform=target_transform
         )
 
-        # if not self._check_exists():
-        #     self.download()
+        self.folder_name = images_folder
+        self.annotations_folder_name = annotations_folder
 
         file_path = os.path.join(save_to, self.folder_name)
         print("####Sanad waling through directory: " + file_path)
