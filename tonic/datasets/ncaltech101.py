@@ -50,7 +50,7 @@ class NCALTECH101(Dataset):
 
         file_path = os.path.join(save_to, self.folder_name)
         for path, dirs, files in os.walk(file_path):
-            dirs.sort()
+            files.sort()
             for file in files:
                 if file.endswith("bin"):
                     self.data.append(path + "/" + file)
