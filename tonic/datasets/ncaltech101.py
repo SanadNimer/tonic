@@ -66,18 +66,16 @@ class NCALTECH101(Dataset):
         """
         events = read_mnist_file(self.data[index], dtype=self.dtype)
         target = self.read_annotation(self.targets[index])
+        print("max x: ", max(events["x"]), " ---- ", min(events["x"]))
+        print("max y: ", max(events["y"]), " ---- ", min(events["y"]))
+        print("max t: ", max(events["t"]), " ---- ", min(events["t"]))
+        print("max p: ", max(events["p"]), " ---- ", min(events["p"]))
         events["x"] -= events["x"].min()
         events["y"] -= events["y"].min()
         if self.transform is not None:
             events = self.transform(events)
         transformation = transforms.ToFrame(sensor_size=(240, 180, 2), n_time_bins=5)
         events_transformed = transformation(events)
-        print("###Sanad type of events_transformed: ", type(events_transformed))
-        print("###Sanad type of events_transformed[0][0]: ", type(events_transformed[0][0]))
-        print("###Sanad type of events_transformed[0][0][0]: ", type(events_transformed[0][0][0]))
-        print("###Sanad type of events_transformed[0][0][0][0]: ", type(events_transformed[0][0][0][0]))
-        print("###Sanad events_transformed: ", events_transformed.astype(np.int16).shape)
-        print("_____________________")
         if self.target_transform is not None:
             target = self.target_transform(target)
         print("index: ", index)
