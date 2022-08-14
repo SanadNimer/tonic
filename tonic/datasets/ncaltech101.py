@@ -41,7 +41,7 @@ class NCALTECH101(Dataset):
     ordering = dtype.names
 
     def __init__(self, save_to, transform=None, target_transform=None, images_folder="images",
-                 annotations_folder="annotations", time_bins=5):
+                 annotations_folder="annotations", time_bins=5, sensor_size=(240, 240, 2)):
         super(NCALTECH101, self).__init__(
             save_to, transform=transform, target_transform=target_transform
         )
@@ -49,6 +49,7 @@ class NCALTECH101(Dataset):
         self.folder_name = images_folder
         self.annotations_folder_name = annotations_folder
         self.time_bins = time_bins
+        self.sensor_size = sensor_size
 
         file_path = os.path.join(save_to, self.folder_name)
         for path, dirs, files in os.walk(file_path):
@@ -71,7 +72,7 @@ class NCALTECH101(Dataset):
         events["y"] -= events["y"].min()
         if self.transform is not None:
             events = self.transform(events)
-        transformation = transforms.ToFrame(sensor_size=(240, 180, 2), n_time_bins=self.time_bins)
+        transformation = transforms.ToFrame(sensor_size=self.sensor_size, n_time_bins=self.time_bins)
         events_transformed = transformation(events)
         if self.target_transform is not None:
             target = self.target_transform(target)
