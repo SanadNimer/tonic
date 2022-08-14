@@ -88,10 +88,10 @@ class NCALTECH101(Dataset):
         #     and self._folder_contains_at_least_n_files_of_type(800, ".bin")
         # )
 
-    def read_annotation(self, annotationFileName, width=240, height=180):
+    def read_annotation(self, annotationFileName):
         arr = array.array('h')
         with open(annotationFileName, 'rb') as file:
             arr.fromfile(file, 12)
             (x, y) = arr[2], arr[3]  # coordinates of top left corner
             w, h = arr[4] - arr[2], arr[7] - arr[3]
-            return np.array([x/width, y/height, w/width, h/height])
+            return np.array([x, y, w, h])
